@@ -37,7 +37,9 @@ std::map <uint32_t, uint32_t> Match::pairs(std::vector <Profile> &profiles){
 
 
     //sort pairings in decending order
-
+    for (int i =0; i > score_t.sizeof(); i++){
+        printf("%d, %d, %d\n", scores, scores, pairs);
+    }
     //pick pairs from scores starting from the top and avoiding duplicates 
 
     return pairs;
