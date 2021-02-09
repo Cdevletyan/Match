@@ -1,7 +1,7 @@
 /**
  * test cases for program
  *
- * Copyright (c) 2021, CHristopher Devletyan
+ * Copyright (c) 2021, Christopher Devletyan
 */
 
 #include <cstdint>
