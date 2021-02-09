@@ -9,13 +9,15 @@
 #include <set>
 #include <map>
 #include <cinttypes>
+#include <algorithm>
 #include "match.h"
 #include "data/data.h"
 
-typedef std::tuple<uint32_t, uint32_y, double> score_t;
+typedef std::tuple<uint32_t, uint32_t, double> score_t;
 
+#define S(x) (std::get<0> (m,x) == std::get <0> (f,x) ? std::get1<1> (m,x) +std::get<1> (f,x) : 0)
 double score(Profile m, Profile f){
-    return 0;
+    return S(country) + s(diet) + S(drinking) + S(language) + S(religion) + S(smoking);
 }
 
 std::map <uint32_t, uint32_t> Match::pairs(std::vector <Profile> &profiles){
@@ -35,12 +37,23 @@ std::map <uint32_t, uint32_t> Match::pairs(std::vector <Profile> &profiles){
         }
     }
 
-
     //sort pairings in decending order
-    for (int i =0; i > score_t.sizeof(); i++){
-        printf("%d, %d, %d\n", scores, scores, pairs);
-    }
-    //pick pairs from scores starting from the top and avoiding duplicates 
+    std::sort(score.begin(), score.end(), [] (score_t a, score_t b)){
+        return std::get<2>(a) > std::get<2>(b);
+    });
 
+    //pick pairs from scores starting from the top and avoiding duplicates 
+    for (score_t s : score){
+        uint32_t m =std::get <0>(s),f = std::get<1>(s);
+        if (picked.count(m) == 0 && picked.count(f) == 0)){
+            pair[m] = f;
+            picked.insert(m);
+            picked.insert(f);
+        }
+        if (picked.size() == profiles.size()){
+            break;
+        }
+        }
+    }
     return pairs;
 }
